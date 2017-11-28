@@ -219,10 +219,36 @@ namespace ООП_11_Графика
             for (int c = 0; c < arrayColors.Length; c++)
                 arrayColors[c] = Color.FromArgb(rnd.Next(1, 255), rnd.Next(1, 255), rnd.Next(1, 255));
         }
-
+        Timer timer = new Timer();
+        int timerCounter = 0;
+        Graphics t3;
         private void tabPage3_Paint(object sender, PaintEventArgs e)
+        {
+            t3 = e.Graphics;
+            Point backFoot = new Point(10, 167);
+            Point knee = new Point(20, 150);
+            Point Ass = new Point(10, 133);
+            Point beginNeck = new Point(50, 133);
+            Point endNeck = new Point(60, 120);
+            Point IFrontLeg = new Point(70, 167);
+            Pen pen = new Pen(Color.Black, 1);
+            t3.DrawLine(pen, backFoot, knee);
+            t3.DrawLine(pen, knee, Ass);
+            t3.DrawLine(pen, Ass, beginNeck);
+            t3.DrawLine(pen, beginNeck, IFrontLeg);
+            t3.DrawLine(pen, beginNeck, endNeck);
+            t3.DrawEllipse(pen, new RectangleF(55, 110, 10, 10));
+        }
+        void timer_Tick(object sender, EventArgs e)
         {
 
         }
-    }
+
+        private void tabControl1_Click(object sender, EventArgs e)
+        {
+            timer.Interval = 100;
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
+        }
+    } 
 }
