@@ -211,5 +211,13 @@ namespace ООП_11_Графика
         {
 
         }
+
+        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
+        {
+            arrayColors = new Color[(int)numericUpDown4.Value + 1];
+            Random rnd = new Random();
+            for (int c = 0; c < arrayColors.Length; c++)
+                arrayColors[c] = Color.FromArgb(rnd.Next(1, 255), rnd.Next(1, 255), rnd.Next(1, 255));
+        }
     }
 }

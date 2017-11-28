@@ -193,6 +193,7 @@
             0,
             0,
             0});
+            this.numericUpDown4.ValueChanged += new System.EventHandler(this.numericUpDown4_ValueChanged);
             // 
             // numericUpDown3
             // 
