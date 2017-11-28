@@ -209,7 +209,7 @@ namespace ООП_11_Графика
 
         private void tabPage2_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void numericUpDown4_ValueChanged(object sender, EventArgs e)
@@ -218,6 +218,11 @@ namespace ООП_11_Графика
             Random rnd = new Random();
             for (int c = 0; c < arrayColors.Length; c++)
                 arrayColors[c] = Color.FromArgb(rnd.Next(1, 255), rnd.Next(1, 255), rnd.Next(1, 255));
+        }
+
+        private void tabPage3_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
