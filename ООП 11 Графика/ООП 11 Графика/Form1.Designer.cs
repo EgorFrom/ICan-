@@ -203,7 +203,7 @@
             0,
             0});
             this.numericUpDown3.Minimum = new decimal(new int[] {
-            20,
+            10,
             0,
             0,
             0});
@@ -220,7 +220,7 @@
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(3, 46);
             this.numericUpDown2.Maximum = new decimal(new int[] {
-            200,
+            400,
             0,
             0,
             0});

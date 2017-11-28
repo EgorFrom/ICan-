@@ -173,19 +173,21 @@ namespace ООП_11_Графика
             Pen p = new Pen(Color.FromName(CB.SelectedItem.ToString()), 1);
             //myPath.AddEllipse(new RectangleF((float)(ClientSize.Width / 2 - numericUpDown2.Value), (float)(ClientSize.Height / 2 - numericUpDown2.Value), (float)numericUpDown2.Value * 2, (float)numericUpDown2.Value * 2));
             //myPath.AddEllipse(new RectangleF((float)(ClientSize.Width / 2 - numericUpDown3.Value), (float)(ClientSize.Height / 2 - numericUpDown3.Value), (float)numericUpDown3.Value * 2, (float)numericUpDown3.Value * 2));
-            float C = 360 / ((float)numericUpDown4.Value+1);
+            float C = 360 / ((float)numericUpDown4.Value);
             int i = 0;
             for (float j = 0; j < 360; j += C)
             {
                 GraphicsPath myPath = new GraphicsPath();
                 Brush br = new SolidBrush(arrayColors[i]);
                 myPath.StartFigure();
+                myPath.AddArc(new RectangleF((float)(ClientSize.Width / 2 - numericUpDown2.Value), (float)(ClientSize.Height / 2 - numericUpDown2.Value), (float)numericUpDown2.Value * 2, (float)numericUpDown2.Value * 2), (-1) * j , (-1) * C);
                 myPath.AddArc(new RectangleF((float)(ClientSize.Width / 2 - numericUpDown3.Value), (float)(ClientSize.Height / 2 - numericUpDown3.Value), (float)numericUpDown3.Value * 2, (float)numericUpDown3.Value * 2), (-1) * j, C);
-                g.FillPath(br, myPath);
-                myPath.AddArc(new RectangleF((float)(ClientSize.Width / 2 - numericUpDown2.Value), (float)(ClientSize.Height / 2 - numericUpDown2.Value), (float)numericUpDown2.Value * 2, (float)numericUpDown2.Value * 2), (-1) * (j + C), C);
+                //myPath.AddPie(new Rectangle((int)(ClientSize.Width / 2 - numericUpDown3.Value), (int)(ClientSize.Height / 2 - numericUpDown3.Value), (int)numericUpDown3.Value * 2, (int)numericUpDown3.Value * 2), (-1) * j, C);
+                //myPath.AddPie(new Rectangle((int)(ClientSize.Width / 2 - numericUpDown2.Value), (int)(ClientSize.Height / 2 - numericUpDown2.Value), (int)numericUpDown2.Value * 2, (int)numericUpDown2.Value * 2), (-1) * (j+2*C), C);
+
                 //myPath.CloseFigure();
                 g.FillPath(br, myPath);
-                Pen outLine = new Pen(/*Color.FromArgb(rnd.Next(1,255), rnd.Next(1, 255), rnd.Next(1, 255)),*/Color.Red, 2);
+                Pen outLine = new Pen(arrayColors[i], 1);
                 g.DrawPath(outLine, myPath);
                 i++;
             }
