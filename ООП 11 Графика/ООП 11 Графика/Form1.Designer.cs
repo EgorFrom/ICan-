@@ -73,6 +73,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(456, 416);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             this.tabControl1.Click += new System.EventHandler(this.tabControl1_Click);
             // 
             // tabPage1
@@ -81,7 +82,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(448, 380);
+            this.tabPage1.Size = new System.Drawing.Size(448, 390);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -94,7 +95,7 @@
             this.panel1.Controls.Add(this.numericUpDown1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 277);
+            this.panel1.Location = new System.Drawing.Point(3, 287);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(442, 100);
             this.panel1.TabIndex = 0;
@@ -138,7 +139,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(448, 380);
+            this.tabPage2.Size = new System.Drawing.Size(448, 390);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -157,7 +158,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(317, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(128, 374);
+            this.panel2.Size = new System.Drawing.Size(128, 384);
             this.panel2.TabIndex = 0;
             // 
             // label4
@@ -260,6 +261,7 @@
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Paint += new System.Windows.Forms.PaintEventHandler(this.tabPage3_Paint);
+            this.tabPage3.Leave += new System.EventHandler(this.tabPage3_Leave);
             // 
             // panel3
             // 
