@@ -260,17 +260,13 @@ namespace ООП_11_Графика
         
         int LengthStep = 0;
         int LengthX = 1;
-        //Point backLeg2 = new Point(20, 167);
-        //Point IFrontLeg2 = new Point(50, 167);
         Point backFoot = new Point(20, 167);
         Point Ass = new Point(20, 133);
         Point beginNeck = new Point(50, 133);
         Point endNeck = new Point(60, 120);
-        Point IFrontLeg = new Point(50, 167);
+        Point IFrontLeg = new Point(60, 167);
         Pen pen = new Pen(Color.Black, 1);
-        bool flagStep = false;
         int CounterStep = 0;
-        int CountWait = 0;
         private void tabPage3_Paint(object sender, PaintEventArgs e)
         {
             
@@ -301,13 +297,13 @@ namespace ООП_11_Графика
             {
                 t3 = tabPage3.CreateGraphics();
                 LengthX = 0;
-                timer.Interval = 100;
+                timer.Interval = trackBar1.Value*4;
                 timer.Tick += new EventHandler(timer_Tick);
                 timer.Start();
-                timerTwo.Interval = 30;
+                timerTwo.Interval = trackBar1.Value;
                 timerTwo.Tick += new EventHandler(timer2_Tick);
                 timerTwo.Start();
-                LengthStep = 1;
+                LengthStep = 2;
                 LengthStep2 = 0;
                 flag = true;//если меняется, ноги движется по оси в другую сторону
                 flag2 = false;//если меняется, ноги движется по оси в другую сторону
@@ -339,7 +335,7 @@ namespace ООП_11_Графика
                     backFoot = new Point(10 + LengthStep, 167);
                     t3.DrawLine(pen, backFoot, Ass);
                     LengthStep++;
-                    if (backFoot.X >= Ass.X + 2) { flag = !flag; flagNextLeg = !flagNextLeg; }
+                    if (backFoot.X >= Ass.X + 6) { flag = !flag; flagNextLeg = !flagNextLeg; }
                 }
                 if (!flag && !flagNextLeg)
                 {
@@ -357,7 +353,7 @@ namespace ООП_11_Графика
                     LengthStep2--;
                     IFrontLeg = new Point(60 + LengthStep2, 167);
                     t3.DrawLine(pen, beginNeck, IFrontLeg);
-                    if (IFrontLeg.X <= beginNeck.X - 2) { flag2 = !flag2; flagNextLeg = !flagNextLeg; }
+                    if (IFrontLeg.X <= beginNeck.X) { flag2 = !flag2; flagNextLeg = !flagNextLeg; }
                 }
                 if (flag2 && flagNextLeg)
                 {
@@ -369,6 +365,40 @@ namespace ООП_11_Графика
                 t3.DrawLine(pen, backFoot, Ass);
                 //
             }
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            timer.Interval = trackBar1.Value * 4;
+            timerTwo.Interval = trackBar1.Value;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LengthX = 0;
+            timer.Interval = trackBar1.Value * 4;
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
+            timerTwo.Interval = trackBar1.Value;
+            timerTwo.Tick += new EventHandler(timer2_Tick);
+            timerTwo.Start();
+            LengthStep = 2;
+            LengthStep2 = 0;
+            flag = true;//если меняется, ноги движется по оси в другую сторону
+            flag2 = false;//если меняется, ноги движется по оси в другую сторону
+            flagNextLeg = false;
+            backFoot = new Point(20, 167);
+            Ass = new Point(20, 133);
+            beginNeck = new Point(50, 133);
+            endNeck = new Point(60, 120);
+            IFrontLeg = new Point(60, 167);
+            pen = new Pen(Color.Black, 1);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timer.Stop();
+            timerTwo.Stop();
         }
     } 
 }
