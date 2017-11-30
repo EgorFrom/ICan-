@@ -308,6 +308,10 @@ namespace ООП_11_Графика
                 timerTwo.Tick += new EventHandler(timer2_Tick);
                 timerTwo.Start();
                 LengthStep = 1;
+                LengthStep2 = 0;
+                flag = true;//если меняется, ноги движется по оси в другую сторону
+                flag2 = false;//если меняется, ноги движется по оси в другую сторону
+                flagNextLeg = false;
             }
         }
 
@@ -321,43 +325,50 @@ namespace ООП_11_Графика
                 timer.Stop();
         }
         int LengthStep2 = 0;
-        bool flag = true;
-        bool flag2 = false;
+        bool flag = true;//если меняется, ноги движется по оси в другую сторону
+        bool flag2 = false;//если меняется, ноги движется по оси в другую сторону
+        bool flagNextLeg = false;
         private void timer2_Tick(object sender, EventArgs e)
         {
             //ноги
             /*LengthX*/
-            if (/*backFoot.X < Ass.X + 9*/flag)
+            if (!flagNextLeg)
             {
-                backFoot = new Point(10 + LengthStep , 167);
+                if (/*backFoot.X < Ass.X + 9*/flag && !flagNextLeg)
+                {
+                    backFoot = new Point(10 + LengthStep, 167);
+                    t3.DrawLine(pen, backFoot, Ass);
+                    LengthStep++;
+                    if (backFoot.X >= Ass.X + 2) { flag = !flag; flagNextLeg = !flagNextLeg; }
+                }
+                if (!flag && !flagNextLeg)
+                {
+                    LengthStep--;
+                    backFoot = new Point(10 + LengthStep, 167);
+                    t3.DrawLine(pen, backFoot, Ass);
+                    if (backFoot.X <= Ass.X - 9) { flag = !flag; flagNextLeg = !flagNextLeg; }
+                }
+                    t3.DrawLine(pen, beginNeck, IFrontLeg);
+            }
+            else
+            {
+                if (/*IFrontLeg.X < beginNeck.X+9*/!flag2 && flagNextLeg)
+                {
+                    LengthStep2--;
+                    IFrontLeg = new Point(60 + LengthStep2, 167);
+                    t3.DrawLine(pen, beginNeck, IFrontLeg);
+                    if (IFrontLeg.X <= beginNeck.X - 2) { flag2 = !flag2; flagNextLeg = !flagNextLeg; }
+                }
+                if (flag2 && flagNextLeg)
+                {
+                    IFrontLeg = new Point(60 + LengthStep2, 167);
+                    t3.DrawLine(pen, beginNeck, IFrontLeg);
+                    if (IFrontLeg.X >= beginNeck.X + 9) { flag2 = !flag2; flagNextLeg = !flagNextLeg; }
+                    LengthStep2++;
+                }
                 t3.DrawLine(pen, backFoot, Ass);
-                LengthStep++;
-                if (backFoot.X > Ass.X + 9) flag = !flag;
+                //
             }
-            if (!flag)
-            {
-                LengthStep--;
-                backFoot = new Point(10 + LengthStep, 167);
-                t3.DrawLine(pen, backFoot, Ass);
-                if (backFoot.X < Ass.X - 9) flag = !flag;
-            }
-
-            if (/*IFrontLeg.X < beginNeck.X+9*/!flag2)
-            {
-                LengthStep2--;
-                IFrontLeg = new Point(60 + LengthStep2, 167);
-                t3.DrawLine(pen, beginNeck, IFrontLeg);
-                if (IFrontLeg.X < beginNeck.X - 9) flag2 = !flag2;
-            }
-            if (flag2)
-            {
-                LengthStep2++;
-                IFrontLeg = new Point(60 + LengthStep2, 167);
-                t3.DrawLine(pen, beginNeck, IFrontLeg);
-                if (IFrontLeg.X > beginNeck.X + 9) flag2 = !flag2;
-            }
-            //
-
         }
     } 
 }
