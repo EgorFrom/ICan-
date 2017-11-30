@@ -217,28 +217,39 @@ namespace ООП_11_Графика
                 arrayColors[c] = Color.FromArgb(rnd.Next(1, 255), rnd.Next(1, 255), rnd.Next(1, 255));
         }
         Timer timer = new Timer();
+        Timer timerTwo = new Timer();
+
         Graphics t3;
         void neChetPaint()
         {
-            backFoot = new Point(10 + LengthX, 167);
             Ass = new Point(20  + LengthX, 133);
             beginNeck = new Point(50  + LengthX, 133);
             endNeck = new Point(60 + LengthX, 120);
-            IFrontLeg = new Point(70 + LengthX, 167);
             pen = new Pen(Color.Black, 1);
             ////Ногиt3.DrawLine(pen, backFoot, Ass);
-            t3.DrawLine(pen, beginNeck, IFrontLeg);
-            t3.DrawLine(pen, backFoot, Ass);
-            if (!flagStep)
-            {
-                backLeg2 = new Point(35 + LengthX, 163);
-                IFrontLeg2 = new Point(75 + LengthX, 163);
-                t3.DrawLine(pen, beginNeck, IFrontLeg2);
-                t3.DrawLine(pen, backLeg2, Ass);
-                flagStep = !flagStep;
-            }
-            else
-                flagStep = !flagStep;
+
+            //if (backFoot.X < Ass.X-9 && IFrontLeg.X < beginNeck.X-9)
+            //{
+            //    backFoot = new Point(10 + LengthStep, 167);//                0  
+            //    IFrontLeg = new Point(60 + LengthStep, 167);//         _____/
+            //    LengthStep = 0;  //                                   /     \
+            //}
+            //if (backFoot.X < Ass.X-9 && IFrontLeg.X > beginNeck.X+9)
+            //{
+
+            //    backFoot = new Point(10 + LengthStep, 167);//                   0
+            //    IFrontLeg = new Point(40 + LengthStep, 167); //           _____/
+            //    LengthStep = 0;  //                                      /    /
+
+            //}
+            //if (backFoot.X > Ass.X + 9 && IFrontLeg.X > beginNeck.X + 9)
+            //{
+
+            //    backFoot = new Point(30 + LengthStep, 167);//                 0
+            //    IFrontLeg = new Point(60 + LengthStep, 167);//          _____/
+            //    LengthStep = 0;    //                                   \    \
+            //}
+            //    LengthStep = LengthX;
 
             ////
             t3.DrawLine(pen, Ass, beginNeck);
@@ -246,17 +257,20 @@ namespace ООП_11_Графика
             t3.DrawEllipse(pen, new RectangleF(55  + LengthX, 110, 10, 10));
             LengthX++;
         }
+        
+        int LengthStep = 0;
         int LengthX = 1;
-        Point backLeg2 = new Point(30, 167);
-        Point IFrontLeg2 = new Point(50, 167);
-        Point backFoot = new Point(10, 167);
+        //Point backLeg2 = new Point(20, 167);
+        //Point IFrontLeg2 = new Point(50, 167);
+        Point backFoot = new Point(20, 167);
         Point Ass = new Point(20, 133);
         Point beginNeck = new Point(50, 133);
         Point endNeck = new Point(60, 120);
-        Point IFrontLeg = new Point(70, 167);
+        Point IFrontLeg = new Point(50, 167);
         Pen pen = new Pen(Color.Black, 1);
         bool flagStep = false;
-        int CounterStep = 0;//0-задняя нога назад, передняя вперед; 1-задняя вперед, передняя вперед; 2-задняя назад 
+        int CounterStep = 0;
+        int CountWait = 0;
         private void tabPage3_Paint(object sender, PaintEventArgs e)
         {
             
@@ -266,6 +280,7 @@ namespace ООП_11_Графика
             msec++;
             Refresh();
             neChetPaint();
+            
             if (msec == 10)
             {
 
@@ -289,6 +304,10 @@ namespace ООП_11_Графика
                 timer.Interval = 100;
                 timer.Tick += new EventHandler(timer_Tick);
                 timer.Start();
+                timerTwo.Interval = 30;
+                timerTwo.Tick += new EventHandler(timer2_Tick);
+                timerTwo.Start();
+                LengthStep = 1;
             }
         }
 
@@ -300,6 +319,45 @@ namespace ООП_11_Графика
         {
             if (tabControl1.SelectedIndex < 2)
                 timer.Stop();
+        }
+        int LengthStep2 = 0;
+        bool flag = true;
+        bool flag2 = false;
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            //ноги
+            /*LengthX*/
+            if (/*backFoot.X < Ass.X + 9*/flag)
+            {
+                backFoot = new Point(10 + LengthStep , 167);
+                t3.DrawLine(pen, backFoot, Ass);
+                LengthStep++;
+                if (backFoot.X > Ass.X + 9) flag = !flag;
+            }
+            if (!flag)
+            {
+                LengthStep--;
+                backFoot = new Point(10 + LengthStep, 167);
+                t3.DrawLine(pen, backFoot, Ass);
+                if (backFoot.X < Ass.X - 9) flag = !flag;
+            }
+
+            if (/*IFrontLeg.X < beginNeck.X+9*/!flag2)
+            {
+                LengthStep2--;
+                IFrontLeg = new Point(60 + LengthStep2, 167);
+                t3.DrawLine(pen, beginNeck, IFrontLeg);
+                if (IFrontLeg.X < beginNeck.X - 9) flag2 = !flag2;
+            }
+            if (flag2)
+            {
+                LengthStep2++;
+                IFrontLeg = new Point(60 + LengthStep2, 167);
+                t3.DrawLine(pen, beginNeck, IFrontLeg);
+                if (IFrontLeg.X > beginNeck.X + 9) flag2 = !flag2;
+            }
+            //
+
         }
     } 
 }
