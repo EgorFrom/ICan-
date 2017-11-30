@@ -222,70 +222,99 @@ namespace ООП_11_Графика
         Timer timer = new Timer();
         int timerCounter = 0;
         Graphics t3;
-        int height = 2;
         void neChetPaint()
         {
+            if (backLegStep)
+            {
+                backFoot = new Point(10 + LengthX + StepLeg, 167);
+                Ass = new Point(10 + tenmsec + LengthX, 133);
+                beginNeck = new Point(50 + tenmsec + LengthX, 133);
+                endNeck = new Point(60 + tenmsec + LengthX, 120);
+                IFrontLeg = new Point(70 + LengthX, 167);
+                pen = new Pen(Color.Black, 1);
+                t3.DrawLine(pen, backFoot, Ass);
+                t3.DrawLine(pen, Ass, beginNeck);
+                t3.DrawLine(pen, beginNeck, IFrontLeg);
+                t3.DrawLine(pen, beginNeck, endNeck);
+                t3.DrawEllipse(pen, new RectangleF(55 + tenmsec + LengthX, 110, 10, 10));
+                //height += 1;
+                LengthX++;
+            }
+            else
+            {
 
-            backFoot = new Point(10 + LengthX, 167);
-            knee = new Point(20 - tenmsec + LengthX, 150 - height);
-            Ass = new Point(10 + tenmsec + LengthX, 133 - height);
-            beginNeck = new Point(50 + tenmsec + LengthX, 133 - height);
-            endNeck = new Point(60 + tenmsec + LengthX, 120 - height);
-            IFrontLeg = new Point(70 + LengthX, 167);
-            pen = new Pen(Color.Black, 1);
-            t3.DrawLine(pen, backFoot, knee);
-            t3.DrawLine(pen, knee, Ass);
-            t3.DrawLine(pen, Ass, beginNeck);
-            t3.DrawLine(pen, beginNeck, IFrontLeg);
-            t3.DrawLine(pen, beginNeck, endNeck);
-            t3.DrawEllipse(pen, new RectangleF(55 + tenmsec + LengthX, 110 - height, 10, 10));
-            //height += 1;
-            LengthX++;
-
+                backFoot = new Point(10 + LengthX, 167);
+                Ass = new Point(10 + tenmsec + LengthX, 133);
+                beginNeck = new Point(50 + tenmsec + LengthX, 133);
+                endNeck = new Point(60 + tenmsec + LengthX, 120);
+                IFrontLeg = new Point(70 + LengthX + StepLeg, 167);
+                pen = new Pen(Color.Black, 1);
+                t3.DrawLine(pen, backFoot, Ass);
+                t3.DrawLine(pen, Ass, beginNeck);
+                t3.DrawLine(pen, beginNeck, IFrontLeg);
+                t3.DrawLine(pen, beginNeck, endNeck);
+                t3.DrawEllipse(pen, new RectangleF(55 + tenmsec + LengthX, 110, 10, 10));
+                //height += 1;
+                LengthX++;
+            }
         }
         void ChetPaint()
         {
-            backFoot = new Point(10 + LengthX, 167);
-            knee = new Point(20 - tenmsec - 1 + LengthX, 150 - height);
-            Ass = new Point(10 + tenmsec + 1 + LengthX, 133 - height);
-            beginNeck = new Point(50 + tenmsec + 1 + LengthX, 133 - height);
-            endNeck = new Point(60 + tenmsec + 1 + LengthX, 120 - height);
-            IFrontLeg = new Point(70 + LengthX, 167);
-            pen = new Pen(Color.Black, 1);
-            t3.DrawLine(pen, backFoot, knee);
-            t3.DrawLine(pen, knee, Ass);
-            t3.DrawLine(pen, Ass, beginNeck);
-            t3.DrawLine(pen, beginNeck, IFrontLeg);
-            t3.DrawLine(pen, beginNeck, endNeck);
-            t3.DrawEllipse(pen, new RectangleF(55 + tenmsec + 1 + LengthX, 110 - height, 10, 10));
-            //height += 1;
-            LengthX++;
+            if (backLegStep)
+            {
+                backFoot = new Point(10 + LengthX + StepLeg, 167);
+                Ass = new Point(10 + tenmsec + 1 + LengthX, 133);
+                beginNeck = new Point(50 + tenmsec + 1 + LengthX, 133);
+                endNeck = new Point(60 + tenmsec + 1 + LengthX, 120);
+                IFrontLeg = new Point(70 + LengthX, 167);
+                pen = new Pen(Color.Black, 1);
+                t3.DrawLine(pen, backFoot, Ass);
+                t3.DrawLine(pen, Ass, beginNeck);
+                t3.DrawLine(pen, beginNeck, IFrontLeg);
+                t3.DrawLine(pen, beginNeck, endNeck);
+                t3.DrawEllipse(pen, new RectangleF(55 + tenmsec + 1 + LengthX, 110, 10, 10));
+                //height += 1;
+                LengthX++;
+            }else
+            {
+                backFoot = new Point(10 + LengthX, 167);
+                Ass = new Point(10 + tenmsec + 1 + LengthX, 133);
+                beginNeck = new Point(50 + tenmsec + 1 + LengthX, 133);
+                endNeck = new Point(60 + tenmsec + 1 + LengthX, 120);
+                IFrontLeg = new Point(70 + LengthX + StepLeg, 167);
+                pen = new Pen(Color.Black, 1);
+                t3.DrawLine(pen, backFoot, Ass);
+                t3.DrawLine(pen, Ass, beginNeck);
+                t3.DrawLine(pen, beginNeck, IFrontLeg);
+                t3.DrawLine(pen, beginNeck, endNeck);
+                t3.DrawEllipse(pen, new RectangleF(55 + tenmsec + 1 + LengthX, 110, 10, 10));
+                //height += 1;
+                LengthX++;
+
+            }
         }
+        int StepLeg = 15;
         int LengthX = 1;
         Point backFoot = new Point(10, 167);
-        Point knee = new Point(20, 150);
         Point Ass = new Point(10, 133);
         Point beginNeck = new Point(50, 133);
         Point endNeck = new Point(60, 120);
         Point IFrontLeg = new Point(70, 167);
         Pen pen = new Pen(Color.Black, 1);
+        bool backLegStep = false;//false - надо ходить
         private void tabPage3_Paint(object sender, PaintEventArgs e)
         {
             t3 = e.Graphics;
             switch (tenmsec)
             {
-                case 0:
-                    t3.DrawLine(pen, backFoot, knee);
-                    t3.DrawLine(pen, knee, Ass);
-                    t3.DrawLine(pen, Ass, beginNeck);
-                    t3.DrawLine(pen, beginNeck, IFrontLeg);
-                    t3.DrawLine(pen, beginNeck, endNeck);
-                    t3.DrawEllipse(pen, new RectangleF(55, 110, 10, 10));
-                    break;
+                //case 0:
+                //    ChetPaint();
+                //    break;
                 case 1:
                     neChetPaint();
                         break;
                 case 2:
+                    ChetPaint();
                     break;
                 case 3:
                     neChetPaint();
@@ -335,11 +364,14 @@ namespace ООП_11_Графика
         void timer_Tick(object sender, EventArgs e)
         {
             msec++;
+            Refresh();
+
             if (msec == 10)
             {
+
                 tenmsec++;
-                Refresh();
                 msec = 0;
+                backLegStep = !backLegStep;
             }
             if (tenmsec == 10)
             {
@@ -354,7 +386,7 @@ namespace ООП_11_Графика
             if (tabControl1.SelectedIndex == 2)
             {
                 LengthX = 0;
-                timer.Interval = 1;
+                timer.Interval = 100;
                 timer.Tick += new EventHandler(timer_Tick);
                 timer.Start();
             }
