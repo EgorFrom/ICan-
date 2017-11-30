@@ -220,28 +220,43 @@ namespace ООП_11_Графика
         Graphics t3;
         void neChetPaint()
         {
-                backFoot = new Point(10 + LengthX, 167);
-                Ass = new Point(20  + LengthX, 133);
-                beginNeck = new Point(50  + LengthX, 133);
-                endNeck = new Point(60 + LengthX, 120);
-                IFrontLeg = new Point(70 + LengthX, 167);
-                pen = new Pen(Color.Black, 1);
-                t3.DrawLine(pen, backFoot, Ass);
-                t3.DrawLine(pen, Ass, beginNeck);
-                t3.DrawLine(pen, beginNeck, IFrontLeg);
-                t3.DrawLine(pen, beginNeck, endNeck);
-                t3.DrawEllipse(pen, new RectangleF(55  + LengthX, 110, 10, 10));
-                LengthX++;
+            backFoot = new Point(10 + LengthX, 167);
+            Ass = new Point(20  + LengthX, 133);
+            beginNeck = new Point(50  + LengthX, 133);
+            endNeck = new Point(60 + LengthX, 120);
+            IFrontLeg = new Point(70 + LengthX, 167);
+            pen = new Pen(Color.Black, 1);
+            ////Ногиt3.DrawLine(pen, backFoot, Ass);
+            t3.DrawLine(pen, beginNeck, IFrontLeg);
+            t3.DrawLine(pen, backFoot, Ass);
+            if (!flagStep)
+            {
+                backLeg2 = new Point(35 + LengthX, 163);
+                IFrontLeg2 = new Point(75 + LengthX, 163);
+                t3.DrawLine(pen, beginNeck, IFrontLeg2);
+                t3.DrawLine(pen, backLeg2, Ass);
+                flagStep = !flagStep;
+            }
+            else
+                flagStep = !flagStep;
+
+            ////
+            t3.DrawLine(pen, Ass, beginNeck);
+            t3.DrawLine(pen, beginNeck, endNeck);
+            t3.DrawEllipse(pen, new RectangleF(55  + LengthX, 110, 10, 10));
+            LengthX++;
         }
-        int StepLeg = 0;
         int LengthX = 1;
+        Point backLeg2 = new Point(30, 167);
+        Point IFrontLeg2 = new Point(50, 167);
         Point backFoot = new Point(10, 167);
-        Point Ass = new Point(10, 133);
+        Point Ass = new Point(20, 133);
         Point beginNeck = new Point(50, 133);
         Point endNeck = new Point(60, 120);
         Point IFrontLeg = new Point(70, 167);
         Pen pen = new Pen(Color.Black, 1);
-        bool backLegStep = false;//false - надо ходить
+        bool flagStep = false;
+        int CounterStep = 0;//0-задняя нога назад, передняя вперед; 1-задняя вперед, передняя вперед; 2-задняя назад 
         private void tabPage3_Paint(object sender, PaintEventArgs e)
         {
             
