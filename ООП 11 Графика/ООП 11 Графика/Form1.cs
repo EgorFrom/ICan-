@@ -35,11 +35,17 @@ namespace ООП_11_Графика
         {
         }
         ColorComboBox CB;
+        Label lb;
         private void Form1_Load(object sender, EventArgs e)
         {
+            lb = new Label();
             CB = new ColorComboBox();
-            CB.Location = new Point(100,50);
+            CB.Location = new Point(50,50);
+            lb.Location = new Point(47, 25);
+            lb.Text = "Цвет линий:";
+            lb.Show();
             CB.Show();
+            lb.Parent = panel1;
             CB.Parent = panel1;
             CB.SelectedIndexChanged += new EventHandler(ColorComboBox_Changed);
         }
@@ -294,12 +300,19 @@ namespace ООП_11_Графика
         {
 
         }
-
+        bool flagColorLines = true;
         private void pictureBox1_Paint_1(object sender, PaintEventArgs e)
         {
             int y = 10;
             Graphics g = e.Graphics;
             Pen p = new Pen(Color.FromName(CB.SelectedItem.ToString()), 1);
+            if (flagColorLines)
+            { p = new Pen(Color.FromName(CB.SelectedItem.ToString()), 1); }
+            else
+            {
+                Random rnd = new Random();
+                p = new Pen(Color.FromArgb(rnd.Next(1, 255), rnd.Next(1, 255), rnd.Next(1, 255)), 1);
+            }
             Point beginXDown = new Point(0, (ClientSize.Height / 2 - 100) + (int)(numericUpDown1.Value / 2));
             Point endXDown = new Point(ClientSize.Width, (ClientSize.Height / 2 - 100) + (int)(numericUpDown1.Value / 2));
             Point beginXUp = new Point(0, (ClientSize.Height / 2 - 100) - (int)(numericUpDown1.Value / 2));
@@ -374,14 +387,18 @@ namespace ООП_11_Графика
                 }
             }
         }
-
+        bool flagFOne = false;
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             Random rnd = new Random();
             Graphics ds = CreateGraphics();
             Pen p = new Pen(Color.FromName(CB.SelectedItem.ToString()), 1);
-            float C = 360 / ((float)numericUpDown4.Value);
+            if (flagFOne)
+            { 
+                Brush brFon = new HatchBrush(HatchStyle.ZigZag, Color.White, Color.Blue);
+                g.FillRectangle(brFon, new Rectangle(pictureBox2.Location.X, pictureBox2.Location.Y, pictureBox2.Width, pictureBox2.Height));
+            } float C = 360 / ((float)numericUpDown4.Value);
             int i = 0;
             for (float j = 0; j < 360; j += C)
             {
@@ -425,6 +442,26 @@ namespace ООП_11_Графика
         private void tabPage3_SizeChanged(object sender, EventArgs e)
         {
             tabControl1_Click(sender, e);
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            CB.Enabled = false;
+            flagColorLines = false;
+            pictureBox1.Refresh();
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            flagColorLines = true;
+            CB.Enabled = true;
+            pictureBox1.Refresh();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            flagFOne = !flagFOne;
+            pictureBox2.Refresh();
         }
     } 
 }
