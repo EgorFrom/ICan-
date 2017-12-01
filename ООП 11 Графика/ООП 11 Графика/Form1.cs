@@ -28,7 +28,7 @@ namespace ООП_11_Графика
         }
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            Invalidate();
+            Refresh();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -41,8 +41,12 @@ namespace ООП_11_Графика
             CB.Location = new Point(100,50);
             CB.Show();
             CB.Parent = panel1;
+            CB.SelectedIndexChanged += new EventHandler(ColorComboBox_Changed);
         }
-
+        void ColorComboBox_Changed(object sender, EventArgs e)
+        {
+            Refresh();
+        }
         private void tabPage1_Paint(object sender, PaintEventArgs e)
         {
             int y = 10;
@@ -72,21 +76,7 @@ namespace ООП_11_Графика
             float C = 0;
             C = ((widthCadr- (float)(numericUpDown1.Value / 8)) / (CountRect+1));
             
-            //for (float i = 0; i < ClientSize.Width; i += (float)widthCadr+ (float)numericUpDown1.Value / 8 + C)
-            //{
-            //    g.DrawEllipse(p, i+(XCadr.X + widthCadr / 8), (XCadr.Y) + 1, HeightCadr / 3, HeightCadr / 3);
-            //    g.DrawLine(p, i + (XCadr.X + widthCadr * 2 / 8) - 2, XCadr.Y + 1 + HeightCadr * 2 / 3, i + (XCadr.X + widthCadr * 2 / 8) - 2, XCadr.Y + HeightCadr / 3);
-            //    Point Ass = new Point((int)(i +( XCadr.X + widthCadr * 2 / 8) - 2),  (int)(XCadr.Y + 1 + HeightCadr * 2 / 3));
-            //    Point Leftfoot = new Point((int)(i +(XCadr.X + widthCadr / 8)), XCadr.Y + (int)HeightCadr);
-            //    Point Rightfoot = new Point((int)(i+(XCadr.X + widthCadr * 3 / 8 - 5)), XCadr.Y + (int)HeightCadr);
-            //    g.DrawLine(p, Ass, Rightfoot);
-            //    g.DrawLine(p, Ass, Leftfoot);
-            //    Point neck = new Point((int)(i +(XCadr.X + widthCadr * 2 / 8)) - 2, (int)(XCadr.Y + HeightCadr / 3 + 5));
-            //    Point leftHand = new Point((int)(i+(XCadr.X + widthCadr / 8)), XCadr.Y + (int)(HeightCadr) - 20);
-            //    Point rightHand = new Point((int)(i+(XCadr.X + widthCadr * 3 / 8 - 5)), XCadr.Y + (int)HeightCadr - 20);
-            //    g.DrawLine(p, neck, leftHand);
-            //    g.DrawLine(p, neck, rightHand);
-            //}
+           
             int countFor = 0;
             if (numericUpDown1.Value < 125)
             {
@@ -145,8 +135,8 @@ namespace ООП_11_Графика
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Visible = false;
-                Visible = true;
+                Refresh();
+
             }
         }
 
@@ -154,8 +144,7 @@ namespace ООП_11_Графика
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Visible = false;
-                Visible = true;
+                Refresh();
             }
         }
 
@@ -171,8 +160,6 @@ namespace ООП_11_Графика
             Random rnd = new Random();
             Graphics ds = CreateGraphics();
             Pen p = new Pen(Color.FromName(CB.SelectedItem.ToString()), 1);
-            //myPath.AddEllipse(new RectangleF((float)(ClientSize.Width / 2 - numericUpDown2.Value), (float)(ClientSize.Height / 2 - numericUpDown2.Value), (float)numericUpDown2.Value * 2, (float)numericUpDown2.Value * 2));
-            //myPath.AddEllipse(new RectangleF((float)(ClientSize.Width / 2 - numericUpDown3.Value), (float)(ClientSize.Height / 2 - numericUpDown3.Value), (float)numericUpDown3.Value * 2, (float)numericUpDown3.Value * 2));
             float C = 360 / ((float)numericUpDown4.Value);
             int i = 0;
             for (float j = 0; j < 360; j += C)
@@ -215,6 +202,7 @@ namespace ООП_11_Графика
             Random rnd = new Random();
             for (int c = 0; c < arrayColors.Length; c++)
                 arrayColors[c] = Color.FromArgb(rnd.Next(1, 255), rnd.Next(1, 255), rnd.Next(1, 255));
+            Refresh();
         }
         Timer timer = new Timer();
         Timer timerTwo = new Timer();
@@ -226,32 +214,7 @@ namespace ООП_11_Графика
             beginNeck = new Point(50  + LengthX, 133);
             endNeck = new Point(60 + LengthX, 120);
             pen = new Pen(Color.Black, 1);
-            ////Ногиt3.DrawLine(pen, backFoot, Ass);
-
-            //if (backFoot.X < Ass.X-9 && IFrontLeg.X < beginNeck.X-9)
-            //{
-            //    backFoot = new Point(10 + LengthStep, 167);//                0  
-            //    IFrontLeg = new Point(60 + LengthStep, 167);//         _____/
-            //    LengthStep = 0;  //                                   /     \
-            //}
-            //if (backFoot.X < Ass.X-9 && IFrontLeg.X > beginNeck.X+9)
-            //{
-
-            //    backFoot = new Point(10 + LengthStep, 167);//                   0
-            //    IFrontLeg = new Point(40 + LengthStep, 167); //           _____/
-            //    LengthStep = 0;  //                                      /    /
-
-            //}
-            //if (backFoot.X > Ass.X + 9 && IFrontLeg.X > beginNeck.X + 9)
-            //{
-
-            //    backFoot = new Point(30 + LengthStep, 167);//                 0
-            //    IFrontLeg = new Point(60 + LengthStep, 167);//          _____/
-            //    LengthStep = 0;    //                                   \    \
-            //}
-            //    LengthStep = LengthX;
-
-            ////
+           
             t3.DrawLine(pen, Ass, beginNeck);
             t3.DrawLine(pen, beginNeck, endNeck);
             t3.DrawEllipse(pen, new RectangleF(55  + LengthX, 110, 10, 10));
@@ -266,7 +229,6 @@ namespace ООП_11_Графика
         Point endNeck = new Point(60, 120);
         Point IFrontLeg = new Point(60, 167);
         Pen pen = new Pen(Color.Black, 1);
-        int CounterStep = 0;
         private void tabPage3_Paint(object sender, PaintEventArgs e)
         {
             
@@ -303,7 +265,7 @@ namespace ООП_11_Графика
                 timerTwo.Interval = trackBar1.Value;
                 timerTwo.Tick += new EventHandler(timer2_Tick);
                 timerTwo.Start();
-                LengthStep = 2;
+                LengthStep = 0;
                 LengthStep2 = 0;
                 flag = true;//если меняется, ноги движется по оси в другую сторону
                 flag2 = false;//если меняется, ноги движется по оси в другую сторону
@@ -335,7 +297,8 @@ namespace ООП_11_Графика
                     backFoot = new Point(10 + LengthStep, 167);
                     t3.DrawLine(pen, backFoot, Ass);
                     LengthStep++;
-                    if (backFoot.X >= Ass.X + 6) { flag = !flag; flagNextLeg = !flagNextLeg; }
+                    if (backFoot.X >= Ass.X + 6)
+                    { flag = !flag; flagNextLeg = !flagNextLeg; }
                 }
                 if (!flag && !flagNextLeg)
                 {
@@ -348,14 +311,14 @@ namespace ООП_11_Графика
             }
             else
             {
-                if (/*IFrontLeg.X < beginNeck.X+9*/!flag2 && flagNextLeg)
+                if (/*IFrontLeg.X < beginNeck.X+9*/flag2 && flagNextLeg)
                 {
                     LengthStep2--;
                     IFrontLeg = new Point(60 + LengthStep2, 167);
                     t3.DrawLine(pen, beginNeck, IFrontLeg);
                     if (IFrontLeg.X <= beginNeck.X) { flag2 = !flag2; flagNextLeg = !flagNextLeg; }
                 }
-                if (flag2 && flagNextLeg)
+                if (!flag2 && flagNextLeg)
                 {
                     IFrontLeg = new Point(60 + LengthStep2, 167);
                     t3.DrawLine(pen, beginNeck, IFrontLeg);
@@ -375,14 +338,20 @@ namespace ООП_11_Графика
 
         private void button1_Click(object sender, EventArgs e)
         {
-            LengthX = 0;
+            timer.Stop();
+            timerTwo.Stop();
+
+            timer = new Timer();
+            timerTwo = new Timer();
+            LengthX = 1;
             timer.Interval = trackBar1.Value * 4;
+            
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
             timerTwo.Interval = trackBar1.Value;
             timerTwo.Tick += new EventHandler(timer2_Tick);
             timerTwo.Start();
-            LengthStep = 2;
+            LengthStep = 0;
             LengthStep2 = 0;
             flag = true;//если меняется, ноги движется по оси в другую сторону
             flag2 = false;//если меняется, ноги движется по оси в другую сторону
@@ -397,8 +366,33 @@ namespace ООП_11_Графика
 
         private void button2_Click(object sender, EventArgs e)
         {
+            t3.DrawLine(pen, Ass, beginNeck);
+            t3.DrawLine(pen, beginNeck, endNeck);
+            t3.DrawEllipse(pen, new RectangleF(55 + LengthX, 110, 10, 10));
+            t3.DrawLine(pen, backFoot, Ass);
+            t3.DrawLine(pen, beginNeck, IFrontLeg);
             timer.Stop();
             timerTwo.Stop();
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            Refresh();
+        }
+
+        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
+        {
+            Refresh();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     } 
 }
